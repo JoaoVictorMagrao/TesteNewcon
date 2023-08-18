@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { api, updatePonto } from '../service/service';
+const urlParams = new URLSearchParams(window.location.search);
+const idEditar = urlParams.get('id');
+console.log(idEditar);
 const Swal = require('sweetalert2')
 
 function TouristSpot() {
@@ -8,6 +11,8 @@ function TouristSpot() {
   const [descricao, setDescricao] = useState('');
   const [endereco, setEndereco] = useState('');
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
+
+
 
   const estados = [
     { nome: 'Acre', sigla: 'AC' },

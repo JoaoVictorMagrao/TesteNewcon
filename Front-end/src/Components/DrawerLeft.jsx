@@ -27,7 +27,7 @@ export let currentPage = '';
 
 
     const handleButtonAddTouristSpot  = (values) => {
-     navigate('/PontoTuristico');
+     navigate('/TouristSpot');
    }
 
   return(
