@@ -15,6 +15,7 @@ import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
+import WestIcon from '@mui/icons-material/West';
 
 //export let valorBotao = 'Cadastrar Aluno';
 export let currentPage = '';
@@ -26,7 +27,7 @@ export let currentPage = '';
 
 
     const handleButtonAddTouristSpot  = (values) => {
-     navigate('/TouristSpot');
+     navigate('/PontoTuristico');
    }
 
   return(
@@ -38,7 +39,7 @@ export let currentPage = '';
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Ponto Turístico
+           <WestIcon/> Ponto Turístico
           </Typography> 
         </Toolbar>
       </AppBar>

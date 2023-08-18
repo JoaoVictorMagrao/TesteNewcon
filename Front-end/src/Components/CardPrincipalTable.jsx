@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom} from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
 import { usePontosContext } from '../context';
+import { useNavigate } from 'react-router-dom';
 
 function CardPrincipalTable({ openModal, openModalEdit }) {
   const { pontos, loading, ExcluirPonto, visualizarItens } = usePontosContext();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  
+  const navigate = useNavigate();
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
   return (
@@ -43,10 +44,7 @@ function CardPrincipalTable({ openModal, openModalEdit }) {
                             <Pencil
                               size={25}
                               color='black'
-                              onClick={() => {
-                                visualizarItens(ponto.id);
-                                openModalEdit(ponto.id);
-                              }}
+                              onClick={() => navigate(`/PontoTuristico/${ponto.id}`)}
                               className='cursor-pointer ml-3'
                             />
                              </Tooltip>
