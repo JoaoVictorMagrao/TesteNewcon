@@ -6,8 +6,8 @@ export const api = axios.create({
 })
 
 export const getPontosService = async () => {
-  const result = await api.get('listarPontoTuristico')
-  return result.data
+  const response = await api.get('listarPontoTuristico');
+  return response.data;
 }
 
 export async function addTouristSpot(newTouristSpot) {

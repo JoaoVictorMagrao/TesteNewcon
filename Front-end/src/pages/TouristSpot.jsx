@@ -67,11 +67,6 @@ function TouristSpot() {
             timer: 1500,
           })
       
-          setNome('');
-          setDescricao('');
-          setEndereco('');
-          setEstadoSelecionado('');
-          setCidade('');
         }else{
           Swal.fire({
             position: 'top-center',

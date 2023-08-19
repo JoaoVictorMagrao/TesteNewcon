@@ -2,14 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { PontosProvider } from './context'
+//import { PontosProvider } from './context'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <PontosProvider>
+    {/* <PontosProvider> */}
       <App />
-    </PontosProvider>
+    {/* </PontosProvider> */}
   </React.StrictMode>
 )
 

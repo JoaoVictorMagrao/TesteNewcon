@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom} from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
-import { usePontosContext } from '../context';
-import { useNavigate } from 'react-router-dom';
+import { getPontosService } from '../service/service';
 
 function CardPrincipalTable() {
-  const { pontos, loading, ExcluirPonto, visualizarItens } = usePontosContext();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const navigate = useNavigate();
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
-
+  const [touristSpotList, setTouristSpotList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  
   const handleButtonEditTouristSpot = async (id) => {
     window.location.href = `/PontoTuristico?id=${id}`;
-};
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getPontosService();
+        setTouristSpotList(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Erro ao obter pontos turísticos', error);
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <div>
       <div className='flex justify-end'>
@@ -35,8 +50,9 @@ function CardPrincipalTable() {
             </TableRow>
             </TableHead>
                 <TableBody>
-                    {pontos.length > 0 ? (
-                      pontos.slice(startIndex, endIndex).map((ponto) => (
+            
+                    {touristSpotList.length > 0 ? (
+                      touristSpotList.slice(startIndex, endIndex).map((ponto) => (
                         <TableRow key={ponto.id}>
                           <TableCell>{ponto.nome}</TableCell>
                           <TableCell>{ponto.descricao}</TableCell>
@@ -58,7 +74,7 @@ function CardPrincipalTable() {
                             <Trash
                               size={25}
                               color='red'
-                              onClick={() => ExcluirPonto(ponto.id)}
+                              //onClick={() => ExcluirPonto(ponto.id)}
                               className='cursor-pointer ml-3'
                             />
                             </Tooltip>
@@ -81,7 +97,7 @@ function CardPrincipalTable() {
             labelRowsPerPage="Linhas por página:"
             labelDisplayedRows={({ from, to, count }) => `${from} Até ${to} de ${count}`}
             component='div'
-            count={pontos.length}
+            count={touristSpotList.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={(event, newPage) => setPage(newPage)}
