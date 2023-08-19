@@ -1,5 +1,5 @@
 import axios from 'axios'
-const Swal = require('sweetalert2')
+
 
 export const api = axios.create({
   baseURL: 'https://localhost:7028/',
@@ -10,16 +10,21 @@ export const getPontosService = async () => {
   return result.data
 }
 
-export const updatePonto = async (id, data) => {
-  const result = await api.put(`editarPontoTuristico/${id}`, data)
+export async function cadastrarPontoTuristico(newTouristSpot) {
+  try {
+    const response = await api.post('adicionaPontoTuristico', newTouristSpot);
+    return response.status; 
+  } catch (error) {
+    throw error; 
+  }
+}
 
-  Swal.fire({
-    position: 'top-center',
-    icon: 'success',
-    title: 'Atualizado com sucesso!!',
-    showConfirmButton: false,
-    timer: 1500,
-  })
+export const atualizarPontoTuristico = async (id, data) => {
+  try {
+  const response = await api.put(`editarPontoTuristico/${id}`, data)
+  return response.status; 
+} catch (error) {
+  throw error;
+}
 
-  return result
 }

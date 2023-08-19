@@ -15,19 +15,19 @@ import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { useNavigate } from 'react-router-dom';
-import WestIcon from '@mui/icons-material/West';
 
-//export let valorBotao = 'Cadastrar Aluno';
-export let currentPage = '';
-
- function DrawerLeft(){
+ function DrawerLeft({title, menu}){
   
   const drawerWidth = 240;
   const navigate = useNavigate();
 
 
-    const handleButtonAddTouristSpot  = (values) => {
-     navigate('/TouristSpot');
+    const handleButtonAddTouristSpot  = () => {
+      if (menu === 'Ir para home') {
+        navigate('/home');
+      } else if (menu === 'Cadastrar Ponto Turístico') {
+        navigate('/PontoTuristico');
+      }
    }
 
   return(
@@ -39,7 +39,7 @@ export let currentPage = '';
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-           <WestIcon/> Ponto Turístico
+          {title}
           </Typography> 
         </Toolbar>
       </AppBar>
@@ -55,13 +55,11 @@ export let currentPage = '';
         variant="permanent"
         anchor="left"
       >
-  
         <Toolbar />
-  
-       
+   
         <Divider />
         <List>
-          {['Cadastrar Ponto Turistico'].map((text, index) => (
+          {[menu].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton onClick={handleButtonAddTouristSpot}>
                 <ListItemIcon>
