@@ -10,7 +10,7 @@ export const getPontosService = async () => {
   return result.data
 }
 
-export async function cadastrarPontoTuristico(newTouristSpot) {
+export async function addTouristSpot(newTouristSpot) {
   try {
     const response = await api.post('adicionaPontoTuristico', newTouristSpot);
     return response.status; 
@@ -19,12 +19,20 @@ export async function cadastrarPontoTuristico(newTouristSpot) {
   }
 }
 
-export const atualizarPontoTuristico = async (id, data) => {
+export const updateTouristSpot = async (id, data) => {
   try {
   const response = await api.put(`editarPontoTuristico/${id}`, data)
   return response.status; 
-} catch (error) {
-  throw error;
+  } catch (error) {
+    throw error;
+  }
 }
 
+export const uniqueTouristSpotList = async (id, data) => {
+  try {
+  const response = await api.get(`obterPontoTuristico/${id}`, data)
+  return { data: response.data, status: response.status };
+  } catch (error) {
+    throw error;
+  }
 }

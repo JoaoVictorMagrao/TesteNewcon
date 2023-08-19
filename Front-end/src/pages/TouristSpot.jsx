@@ -1,6 +1,6 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
-import {atualizarPontoTuristico, cadastrarPontoTuristico} from '../service/service';
+import {updateTouristSpot, addTouristSpot, uniqueTouristSpotList} from '../service/service';
 import { estados } from '../Util/util';
 const urlParams = new URLSearchParams(window.location.search);
 const idEdit = urlParams.get('id');
@@ -10,6 +10,8 @@ const pageTitle = idEdit ? 'Editar Ponto Turístico' : 'Cadastro de Ponto Turís
 
 const Swal = require('sweetalert2')
 
+
+
 function TouristSpot() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
@@ -17,17 +19,45 @@ function TouristSpot() {
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [cidade, setCidade] = useState('');
 
+
   const handleEstadoChange = (event) => {
     setEstadoSelecionado(event.target.value);
   };
 
-  // getPontos()
+
+  useEffect(() => {
+    if (idEdit) {
+      uniqueTouristSpotList(idEdit)
+        .then((value) => {
+          // Define os dados da resposta na variável 'touristSpot'
+          if(value.status){
+            setNome(value.data.nome);
+            setDescricao(value.data.descricao);
+            setEndereco(value.data.endereco);
+            setEstadoSelecionado(value.data.estado);
+            setCidade(value.data.cidade);
+          }else{
+            Swal.fire({
+              position: 'top-center',
+              icon: 'error',
+              title: 'Erro ao buscar os dados do ponto turístico.',
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          }
+          
+        })
+        .catch((error) => {
+          console.error('Erro ao buscar ponto turístico:', error);
+        });
+    }
+  }, [idEdit]); 
   
   async function cadastrarOuAtualizarPontoTuristico(idEdit, newTouristSpot) {
     try {
       if (idEdit) {
 
-        const response = await atualizarPontoTuristico(idEdit, newTouristSpot);
+        const response = await updateTouristSpot(idEdit, newTouristSpot);
         if(response === 200){
           Swal.fire({
             position: 'top-center',
@@ -53,7 +83,7 @@ function TouristSpot() {
         }
 
       } else {
-        const response = await cadastrarPontoTuristico(newTouristSpot);
+        const response = await addTouristSpot(newTouristSpot);
         if(response === 200){
           Swal.fire({
             position: 'top-center',
