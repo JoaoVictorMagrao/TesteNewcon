@@ -5,6 +5,7 @@ import { estados } from '../Util/util';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const urlParams = new URLSearchParams(window.location.search);
 const idEdit = urlParams.get('id');
 
@@ -18,6 +19,7 @@ function TouristSpot() {
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [cidade, setCidade] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  
 
   const handleEstadoChange = (event) => {
     setEstadoSelecionado(event.target.value);
@@ -123,6 +125,7 @@ function TouristSpot() {
       position="bottom-right"
       theme="colored"  />
     </Box>
+    
     
 </div>
     

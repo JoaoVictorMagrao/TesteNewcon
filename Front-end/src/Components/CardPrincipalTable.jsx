@@ -2,6 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom} from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
 import { getPontosService, deleteTouristSpot } from '../service/service';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Slide from '@mui/material/Slide';
+import Button from '@mui/material/Button';
 
 function CardPrincipalTable() {
   const [page, setPage] = useState(0);
@@ -10,25 +19,53 @@ function CardPrincipalTable() {
   const endIndex = startIndex + rowsPerPage;
   const [touristSpotList, setTouristSpotList] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [idToDelete, setIdToDelete] = useState(null);
+
+  const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  async function fetchData() {
+    try {
+      const data = await getPontosService();
+      setTouristSpotList(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Erro ao obter pontos turísticos', error);
+      setLoading(false);
+    }
+  }
+
+  const handleClickOpen = (id) => {
+    setIdToDelete(id);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+ 
+  const handleExcluir = async () => {
+    const response = await deleteTouristSpot(idToDelete);
+    if(response === 200){
+      toast.success('Ponto Turístico excluido com sucesso!');
+      fetchData();
+    }else{
+      toast.error('Erro ao cadastrar Ponto Turístico.');
+    }
+    setOpen(false);
+  };
 
   const handleButtonEditTouristSpot = async (id) => {
     window.location.href = `/PontoTuristico?id=${id}`;
   };
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getPontosService();
-        setTouristSpotList(data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Erro ao obter pontos turísticos', error);
-        setLoading(false);
-      }
-    }
 
-    fetchData();
-  }, []);
 
   return (
     <div>
@@ -74,7 +111,8 @@ function CardPrincipalTable() {
                             <Trash
                               size={25}
                               color='red'
-                              onClick={() => deleteTouristSpot(ponto.id)}
+                              
+                              onClick={() => handleClickOpen(ponto.id)}
                               className='cursor-pointer ml-3'
                             />
                             </Tooltip>
@@ -108,6 +146,32 @@ function CardPrincipalTable() {
           />
         </TableContainer>
       </div>
+      <Dialog
+        open={open}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={handleClose}
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle>{"Excluir Ponto Turístico"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+          Tem certeza de que deseja excluir este Ponto Turístico? Esta ação não pode ser desfeita.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={handleClose}>
+           Cancelar
+        </Button>
+        <Button onClick={handleExcluir}>
+          Excluir
+        </Button>
+        </DialogActions>
+      </Dialog>
+      <ToastContainer 
+      autoClose={3000}
+      position="bottom-right"
+      theme="colored"  />
     </div>
   );
 }
