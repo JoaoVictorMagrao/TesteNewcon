@@ -15,7 +15,16 @@ export async function addTouristSpot(newTouristSpot) {
     const response = await api.post('adicionaPontoTuristico', newTouristSpot);
     return response.status; 
   } catch (error) {
-    throw error; 
+    return error.response.status; 
+  }
+}
+
+export async function deleteTouristSpot(id) {
+  try {
+    const response = await api.delete(`excluiPontoTuristico/${id}`);
+    return response.status;
+  } catch (error) {
+    return error.response.status; 
   }
 }
 
@@ -24,7 +33,7 @@ export const updateTouristSpot = async (id, data) => {
   const response = await api.put(`editarPontoTuristico/${id}`, data)
   return response.status; 
   } catch (error) {
-    throw error;
+    return error.response.status;
   }
 }
 
@@ -33,6 +42,6 @@ export const uniqueTouristSpotList = async (id, data) => {
   const response = await api.get(`obterPontoTuristico/${id}`, data)
   return { data: response.data, status: response.status };
   } catch (error) {
-    throw error;
+    return error.response.status;
   }
 }

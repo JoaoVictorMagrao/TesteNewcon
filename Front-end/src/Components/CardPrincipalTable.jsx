@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom} from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
-import { getPontosService } from '../service/service';
+import { getPontosService, deleteTouristSpot } from '../service/service';
 
 function CardPrincipalTable() {
   const [page, setPage] = useState(0);
@@ -10,7 +10,7 @@ function CardPrincipalTable() {
   const endIndex = startIndex + rowsPerPage;
   const [touristSpotList, setTouristSpotList] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+
   const handleButtonEditTouristSpot = async (id) => {
     window.location.href = `/PontoTuristico?id=${id}`;
   };
@@ -74,7 +74,7 @@ function CardPrincipalTable() {
                             <Trash
                               size={25}
                               color='red'
-                              //onClick={() => ExcluirPonto(ponto.id)}
+                              onClick={() => deleteTouristSpot(ponto.id)}
                               className='cursor-pointer ml-3'
                             />
                             </Tooltip>

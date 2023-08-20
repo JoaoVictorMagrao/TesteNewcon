@@ -2,15 +2,14 @@ import React, { useState, useEffect} from 'react';
 import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import {updateTouristSpot, addTouristSpot, uniqueTouristSpotList} from '../service/service';
 import { estados } from '../Util/util';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const urlParams = new URLSearchParams(window.location.search);
 const idEdit = urlParams.get('id');
 
 const buttonText = idEdit ? 'Atualizar' : 'Cadastrar';
 const pageTitle = idEdit ? 'Editar Ponto Turístico' : 'Cadastro de Ponto Turístico';
-
-const Swal = require('sweetalert2')
-
-
 
 function TouristSpot() {
   const [nome, setNome] = useState('');
@@ -18,7 +17,7 @@ function TouristSpot() {
   const [endereco, setEndereco] = useState('');
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [cidade, setCidade] = useState('');
-
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const handleEstadoChange = (event) => {
     setEstadoSelecionado(event.target.value);
@@ -29,7 +28,6 @@ function TouristSpot() {
     if (idEdit) {
       uniqueTouristSpotList(idEdit)
         .then((value) => {
-          // Define os dados da resposta na variável 'touristSpot'
           if(value.status){
             setNome(value.data.nome);
             setDescricao(value.data.descricao);
@@ -37,74 +35,44 @@ function TouristSpot() {
             setEstadoSelecionado(value.data.estado);
             setCidade(value.data.cidade);
           }else{
-            Swal.fire({
-              position: 'top-center',
-              icon: 'error',
-              title: 'Erro ao buscar os dados do ponto turístico.',
-              showConfirmButton: false,
-              timer: 1500,
-            })
+            toast.error('Erro ao buscar os dados do Ponto Turístico.');
           }
           
         })
         .catch((error) => {
-          console.error('Erro ao buscar ponto turístico:', error);
+          toast.error('Algo de errado aconteceu, tente novamente mais tarde.');
         });
     }
   }, [idEdit]); 
   
   async function cadastrarOuAtualizarPontoTuristico(idEdit, newTouristSpot) {
     try {
+      setIsButtonDisabled(true);
       if (idEdit) {
-
         const response = await updateTouristSpot(idEdit, newTouristSpot);
         if(response === 200){
-          Swal.fire({
-            position: 'top-center',
-            icon: 'success',
-            title: 'Ponto Turístico atualizado com sucesso!!!',
-            showConfirmButton: false,
-            timer: 1500,
-          })
-      
+          toast.success('Ponto Turístico atualizado com sucesso!');
         }else{
-          Swal.fire({
-            position: 'top-center',
-            icon: 'error',
-            title: 'Erro ao cadastrar Ponto Turístico.',
-            showConfirmButton: false,
-            timer: 1500,
-          })
+          toast.error('Erro ao atualizar Ponto Turístico.');
         }
 
       } else {
         const response = await addTouristSpot(newTouristSpot);
         if(response === 200){
-          Swal.fire({
-            position: 'top-center',
-            icon: 'success',
-            title: 'Cadastrado com sucesso!!',
-            showConfirmButton: false,
-            timer: 1500,
-          })
-      
+          toast.success('Ponto Turístico cadastrado com sucesso!');
           setNome('');
           setDescricao('');
           setEndereco('');
           setEstadoSelecionado('');
           setCidade('');
         }else{
-          Swal.fire({
-            position: 'top-center',
-            icon: 'error',
-            title: 'Erro ao cadastrar ponto turístico.',
-            showConfirmButton: false,
-            timer: 1500,
-          })
+          toast.error('Erro ao cadastrar Ponto Turístico.');
         }
       }
     } catch (error) {
-      // Lógica de tratamento de erro geral
+      toast.error('Algo de errado aconteceu, tente novamente mais tarde.');
+    }finally {
+      setIsButtonDisabled(false);
     }
   }
 
@@ -123,6 +91,8 @@ function TouristSpot() {
   };
 
   return (
+    <div> 
+     
     <Box className="flex justify-center items-center h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 shadow-md">
         <h2 className="text-2xl font-semibold mb-4">{pageTitle}</h2>
@@ -144,11 +114,18 @@ function TouristSpot() {
           </Select>
         </FormControl>
         <TextField label="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} fullWidth className="mb-4" />
-        <Button type="submit" variant="contained" color="primary" className="w-full">
-          {buttonText}
+        <Button disabled={isButtonDisabled} type="submit" variant="contained" color="primary" className="w-full">
+          {isButtonDisabled ? 'Processando...' : buttonText} 
         </Button>
       </form>
+      <ToastContainer 
+      autoClose={3000}
+      position="bottom-right"
+      theme="colored"  />
     </Box>
+    
+</div>
+    
   );
 }
 
