@@ -4,6 +4,7 @@ import { Trash, Pencil } from 'phosphor-react';
 import { getPontosService, deleteTouristSpot } from '../service/service';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
