@@ -80,7 +80,7 @@ function CardPrincipalTable() {
             <TableRow>
               <TableCell>Nome</TableCell>
               <TableCell>Descrição</TableCell>
-              <TableCell>Endereço</TableCell>
+              <TableCell>Tipo de Atração</TableCell>
               <TableCell>Estado</TableCell>
               <TableCell>Cidade</TableCell>
               <TableCell>Editar</TableCell>
@@ -88,13 +88,13 @@ function CardPrincipalTable() {
             </TableRow>
             </TableHead>
                 <TableBody>
-            
+            {console.log(touristSpotList)}
                     {touristSpotList.length > 0 ? (
                       touristSpotList.slice(startIndex, endIndex).map((ponto) => (
                         <TableRow key={ponto.id}>
                           <TableCell>{ponto.nome}</TableCell>
                           <TableCell>{ponto.descricao}</TableCell>
-                          <TableCell>{ponto.endereco}</TableCell>
+                          <TableCell>{ponto.tipo_atracao}</TableCell>
                           <TableCell>{ponto.estado}</TableCell>
                           <TableCell>{ponto.cidade}</TableCell>
                           <TableCell>

@@ -15,7 +15,7 @@ const pageTitle = idEdit ? 'Editar Ponto Turístico' : 'Cadastro de Ponto Turís
 function TouristSpot() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [endereco, setEndereco] = useState('');
+  const [tipoAtracao, setTipoAtracao] = useState('');
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [cidade, setCidade] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
@@ -33,7 +33,7 @@ function TouristSpot() {
           if(value.status){
             setNome(value.data.nome);
             setDescricao(value.data.descricao);
-            setEndereco(value.data.endereco);
+            setTipoAtracao(value.data.tipo_atracao);
             setEstadoSelecionado(value.data.estado);
             setCidade(value.data.cidade);
           }else{
@@ -64,7 +64,7 @@ function TouristSpot() {
           toast.success('Ponto Turístico cadastrado com sucesso!');
           setNome('');
           setDescricao('');
-          setEndereco('');
+          setTipoAtracao('');
           setEstadoSelecionado('');
           setCidade('');
         }else{
@@ -84,7 +84,7 @@ function TouristSpot() {
       const newTouristSpot = {
         nome: nome,
         descricao: descricao,
-        endereco: endereco,
+        tipo_atracao: tipoAtracao,
         estado: estadoSelecionado,
         cidade: cidade
       };
@@ -100,7 +100,7 @@ function TouristSpot() {
         <h2 className="text-2xl font-semibold mb-4">{pageTitle}</h2>
         <TextField label="Nome" value={nome} onChange={(e) => setNome(e.target.value)} fullWidth className="mb-4" />
         <TextField label="Descrição" value={descricao} onChange={(e) => setDescricao(e.target.value)} fullWidth multiline className="mb-4" />
-        <TextField label="Endereço" value={endereco} onChange={(e) => setEndereco(e.target.value)} fullWidth className="mb-4" />
+        <TextField label="Tipo Atração" value={tipoAtracao} onChange={(e) => setTipoAtracao(e.target.value)} fullWidth className="mb-4" />
         <FormControl fullWidth margin="normal">
           <InputLabel>Estado</InputLabel>
           <Select

@@ -11,6 +11,7 @@ export const getPontosService = async () => {
 }
 
 export async function addTouristSpot(newTouristSpot) {
+  console.log(newTouristSpot);
   try {
     const response = await api.post('adicionaPontoTuristico', newTouristSpot);
     return response.status; 
