@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Layout from './pages/Layout';
-import TouristSpot from './pages/TouristSpot';
+import Layout from './pages/Layout/index';
+import TouristSpot from './pages/TouristSpot/index';
 import CardPrincipalTable from './Components/CardPrincipalTable';
 export function Router() {
   const urlParams = new URLSearchParams(window.location.search);

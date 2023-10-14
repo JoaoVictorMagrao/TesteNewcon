@@ -8,7 +8,7 @@
 
         public string? Descricao { get; set; }
 
-        public string? endereco { get; set; }
+        public string? tipo_atracao { get; set; }
 
         public string? Estado { get; set; }
 

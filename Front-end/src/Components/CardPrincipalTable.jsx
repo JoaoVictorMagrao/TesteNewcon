@@ -88,7 +88,7 @@ function CardPrincipalTable() {
             </TableRow>
             </TableHead>
                 <TableBody>
-            {console.log(touristSpotList)}
+          
                     {touristSpotList.length > 0 ? (
                       touristSpotList.slice(startIndex, endIndex).map((ponto) => (
                         <TableRow key={ponto.id}>

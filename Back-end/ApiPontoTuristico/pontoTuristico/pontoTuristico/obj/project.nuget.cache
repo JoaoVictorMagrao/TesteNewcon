@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XH8/lojTRTdzqD/NDsPMmbAc0lsoWziy8J3G9zbcg+fqBv7aN+uWwdda8maZ/ltT4t/ULnDAq5+TbnXhkmMm5Q==",
+  "dgSpecHash": "5p26kwyw1zTLARhSve1wOBugyoTIaaAs2zASimAOlGtX7SQPPRzei5yS9kHRCqsJIZwKahL+U2OxEC30bIGwpA==",
   "success": true,
-  "projectFilePath": "D:\\ApiPontoTuristico\\pontoTuristico\\pontoTuristico\\pontoTuristico.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\CrudPontoTuristico\\Back-end\\ApiPontoTuristico\\pontoTuristico\\pontoTuristico\\pontoTuristico.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

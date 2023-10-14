@@ -74,8 +74,8 @@ app.MapPut("editarPontoTuristico/{id}", async (int id, cPontoTuristico cpontoTur
     if (cpontoTuristico.Cidade != null)
         update.Cidade = cpontoTuristico.Cidade;
 
-    if (cpontoTuristico.endereco != null)
-        update.endereco = cpontoTuristico.endereco;
+    if (cpontoTuristico.tipo_atracao != null)
+        update.tipo_atracao = cpontoTuristico.tipo_atracao;
 
     await contexto.SaveChangesAsync();
 
@@ -84,12 +84,6 @@ app.MapPut("editarPontoTuristico/{id}", async (int id, cPontoTuristico cpontoTur
 
 
 });
-
-
-
-
-
-
 
 
 app.UseSwaggerUI();
