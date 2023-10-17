@@ -4,10 +4,9 @@ import { uniqueTouristSpotList } from '../../service/service';
 import { AddOrRegisterTouristPoint } from './functions/addOrRegisterTouristPoint';
 import FormTouristSpost from '../../Components/FormTouristSpot';
 import { estados } from '../../Util/util';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
-
+const url = window.location.href;
 const urlParams = new URLSearchParams(window.location.search);
 const idEdit = urlParams.get('id');
 
@@ -22,7 +21,7 @@ function TouristSpot() {
   const [cidade, setCidade] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
-  let data = {
+  let dataProps = {
     pageTitle: pageTitle,
     nome: nome, 
     descricao: descricao,
@@ -30,15 +29,18 @@ function TouristSpot() {
     estado: estadoSelecionado,
     cidade: cidade,
     estados: estados,
+    isButtonDisabled: isButtonDisabled,
+    buttonText: buttonText
   }
-  
+
 
   const handleEstadoChange = (event) => {
     setEstadoSelecionado(event.target.value);
   };
 
   useEffect(() => {
-    if (idEdit) {
+    
+    if (url.includes('id')) {
       uniqueTouristSpotList(idEdit)
         .then((value) => {
           if(value.status){
@@ -55,10 +57,15 @@ function TouristSpot() {
         .catch((error) => {
           toast.error('Algo de errado aconteceu, tente novamente mais tarde.');
         });
+    }else{
+      setNome('');
+      setDescricao('');
+      setTipoAtracao('');
+      setEstadoSelecionado('');
+      setCidade('');
     }
   }, [idEdit]); 
   
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -73,16 +80,19 @@ function TouristSpot() {
       AddOrRegisterTouristPoint(idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setTipoAtracao, setEstadoSelecionado, setCidade, toast);
   };
 
-
-
   return (
     <div> 
+ 
       <FormTouristSpost
         handleSubmit={handleSubmit}
         handleEstadoChange={handleEstadoChange}
         setNome={setNome}
-        data={data}
+        setDescricao={setDescricao}
+        setTipoAtracao={setTipoAtracao}
+        setCidade={setCidade}
+        data={dataProps}
         />
+        
     </div> 
   );
 }

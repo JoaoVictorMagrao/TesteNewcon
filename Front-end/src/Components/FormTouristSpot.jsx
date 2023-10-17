@@ -1,37 +1,37 @@
 import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 function FormTouristSpot(props) {
+  //console.log(props);
   return (
-      <Box className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={props.handleSubmit} className="bg-white rounded-lg p-6 shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">{props.pageTitle}</h2>
-        <TextField label="Nome" value={props.nome} onChange={(e) => setNome(e.target.value)} fullWidth  cla/>
-        <TextField label="Descrição" value={props.descricao} onChange={(e) => setDescricao(e.target.value)} fullWidth multiline  />
-        <TextField label="Tipo Atração" value={props.tipoAtracao} onChange={(e) => setTipoAtracao(e.target.value)} fullWidth  />
-        <FormControl fullWidth margin="normal">
-          <InputLabel>Estado</InputLabel>
-          <Select
-            value={props.estado}
-            onChange={props.handleEstadoChange}
-            label="Estado"
-          >
-            {props.estados.map((estado) => (
-              <MenuItem key={estado.nome} value={estado.sigla}>
-                {estado.nome}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField label="Cidade" value={cidade} onChange={(e) => setCidade(e.target.value)} fullWidth className="mb-4" />
+    <div>
+        <Box className="flex justify-center">
+        <form onSubmit={props.handleSubmit} className="bg-white rounded-lg p-6 shadow-md">
+          <h2 className="text-2xl font-semibold mb-4">{props.data.pageTitle}</h2>
+          <TextField label="Nome" value={props.data.nome} onChange={(e) => props.setNome(e.target.value)} fullWidth margin="normal"/>
+          <TextField label="Descrição" value={props.data.descricao} onChange={(e) =>  props.setDescricao(e.target.value)} margin="normal" fullWidth multiline  />
+          <TextField label="Tipo Atração" value={props.data.tipo_atracao} onChange={(e) =>  props.setTipoAtracao(e.target.value)} margin="normal" fullWidth  />
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Estado</InputLabel>
+            <Select
+              value={props.data.estado}
+              onChange={props.handleEstadoChange}
+              label="Estado"
+            >
+              {props.data.estados.map((estado) => (
+                <MenuItem key={estado.nome} value={estado.sigla}>
+                  {estado.nome}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField label="Cidade" value={props.data.cidade} onChange={(e) => props.setCidade(e.target.value)} margin="normal" fullWidth className="mb-4" />
 
-        <Button disabled={isButtonDisabled} type="submit" variant="contained" color="primary" className="w-full">
-          {isButtonDisabled ? 'Processando...' : buttonText} 
-        </Button>
-      </form>
-      <ToastContainer 
-      autoClose={3000}
-      position="bottom-right"
-      theme="colored"  />
-      </Box>
+          <Button disabled={props.isButtonDisabled} type="submit" variant="contained" color="primary" className="w-full">
+            {props.isButtonDisabled ? 'Processando...' : props.data.buttonText} 
+          </Button>
+        </form>
+      
+        </Box>
+      </div>
   )
 }
 export default FormTouristSpot;
