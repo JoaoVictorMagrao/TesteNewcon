@@ -38,11 +38,11 @@ namespace ApiPontoTuristico.Repositorios
                 throw new Exception($"Ponto Turistico com o ID: {id} Não foi encontrado no banco de dados.");
             }
 
-            pontoTuristicoPorId.Name = pontosTuristico.Name;
-            pontoTuristicoPorId.Description = pontosTuristico.Description;
-            pontoTuristicoPorId.AttractionType = pontosTuristico.AttractionType;
-            pontoTuristicoPorId.State = pontosTuristico.State;
-            pontoTuristicoPorId.City = pontosTuristico.City;
+            pontoTuristicoPorId.Nome = pontosTuristico.Nome;
+            pontoTuristicoPorId.Descricao = pontosTuristico.Descricao;
+            pontoTuristicoPorId.Endereco = pontosTuristico.Endereco;
+            pontoTuristicoPorId.Estado = pontosTuristico.Estado;
+            pontoTuristicoPorId.Cidade = pontosTuristico.Cidade;
 
             _dbContext.PontosTuristico.Update(pontoTuristicoPorId);
             await _dbContext.SaveChangesAsync();

@@ -4,15 +4,15 @@
     {
         public int Id { get; set; }
 
-        public string? Name { get; set; }
+        public string? Nome { get; set; }
 
-        public string? Description { get; set; }
+        public string? Descricao { get; set; }
 
-        public string? AttractionType { get; set; }
+        public string? Endereco { get; set; }
 
-        public string? State { get; set; }
+        public string? Estado { get; set; }
 
-        public string? City { get; set; }
+        public string? Cidade { get; set; }
 
 
     }

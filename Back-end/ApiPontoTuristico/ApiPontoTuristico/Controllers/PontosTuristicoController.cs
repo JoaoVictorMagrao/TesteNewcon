@@ -2,9 +2,14 @@
 using ApiPontoTuristico.Repositorios.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
+using System.Runtime.Intrinsics.X86;
+using System;
 
 namespace ApiPontoTuristico.Controllers
 {
+
+
     [Route("api/[controller]")]
     [ApiController]
     public class PontosTuristicoController : ControllerBase
