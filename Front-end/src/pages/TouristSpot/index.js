@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { uniqueTouristSpotList } from '../../service/service';
 import { AddOrRegisterTouristPoint } from './functions/addOrRegisterTouristPoint';
@@ -16,16 +16,16 @@ const pageTitle = idEdit ? 'Editar Ponto Turístico' : 'Cadastro de Ponto Turís
 function TouristSpot() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [tipoAtracao, setTipoAtracao] = useState('');
+  const [endereco, setEndereco] = useState('');
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [cidade, setCidade] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   let dataProps = {
     pageTitle: pageTitle,
-    nome: nome, 
+    nome: nome,
     descricao: descricao,
-    tipo_atracao: tipoAtracao,
+    tipo_atracao: endereco,
     estado: estadoSelecionado,
     cidade: cidade,
     estados: estados,
@@ -39,61 +39,61 @@ function TouristSpot() {
   };
 
   useEffect(() => {
-    
+
     if (url.includes('id')) {
       uniqueTouristSpotList(idEdit)
         .then((value) => {
-          if(value.status){
+          if (value.status) {
             setNome(value.data.nome);
             setDescricao(value.data.descricao);
-            setTipoAtracao(value.data.tipo_atracao);
+            setEndereco(value.data.endereco);
             setEstadoSelecionado(value.data.estado);
             setCidade(value.data.cidade);
-          }else{
+          } else {
             toast.error('Erro ao buscar os dados do Ponto Turístico.');
           }
-          
+
         })
         .catch((error) => {
           toast.error('Algo de errado aconteceu, tente novamente mais tarde.');
         });
-    }else{
+    } else {
       setNome('');
       setDescricao('');
-      setTipoAtracao('');
+      setEndereco('');
       setEstadoSelecionado('');
       setCidade('');
     }
-  }, [idEdit]); 
-  
+  }, [idEdit]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-      const newTouristSpot = {
-        nome: nome,
-        descricao: descricao,
-        tipo_atracao: tipoAtracao,
-        estado: estadoSelecionado,
-        cidade: cidade
-      };
-  
-      AddOrRegisterTouristPoint(idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setTipoAtracao, setEstadoSelecionado, setCidade, toast);
+    const newTouristSpot = {
+      nome: nome,
+      descricao: descricao,
+      endereco: endereco,
+      estado: estadoSelecionado,
+      cidade: cidade
+    };
+
+    AddOrRegisterTouristPoint(idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast);
   };
 
   return (
-    <div> 
- 
+    <div>
+
       <FormTouristSpost
         handleSubmit={handleSubmit}
         handleEstadoChange={handleEstadoChange}
         setNome={setNome}
         setDescricao={setDescricao}
-        setTipoAtracao={setTipoAtracao}
+        setEndereco={setEndereco}
         setCidade={setCidade}
         data={dataProps}
-        />
-        
-    </div> 
+      />
+
+    </div>
   );
 }
 

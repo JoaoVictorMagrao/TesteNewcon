@@ -2,37 +2,37 @@ import axios from 'axios'
 
 
 export const api = axios.create({
-  baseURL: 'https://localhost:7028/',
+  baseURL: 'https://localhost:7205/',
 })
 
 export const getPontosService = async () => {
-  const response = await api.get('listarPontoTuristico');
+  const response = await api.get('api/PontosTuristico');
   return response.data;
 }
 
 export async function addTouristSpot(newTouristSpot) {
 
   try {
-    const response = await api.post('adicionaPontoTuristico', newTouristSpot);
-    return response.status; 
+    const response = await api.post('api/PontosTuristico', newTouristSpot);
+    return response.status;
   } catch (error) {
-    return error.response.status; 
+    return error.response.status;
   }
 }
 
 export async function deleteTouristSpot(id) {
   try {
-    const response = await api.delete(`excluiPontoTuristico/${id}`);
+    const response = await api.delete(`api/PontosTuristico/${id}`);
     return response.status;
   } catch (error) {
-    return error.response.status; 
+    return error.response.status;
   }
 }
 
 export const updateTouristSpot = async (id, data) => {
   try {
-  const response = await api.put(`editarPontoTuristico/${id}`, data)
-  return response.status; 
+    const response = await api.put(`api/PontosTuristico/${id}`, data)
+    return response.status;
   } catch (error) {
     return error.response.status;
   }
@@ -40,8 +40,8 @@ export const updateTouristSpot = async (id, data) => {
 
 export const uniqueTouristSpotList = async (id, data) => {
   try {
-  const response = await api.get(`obterPontoTuristico/${id}`, data)
-  return { data: response.data, status: response.status };
+    const response = await api.get(`api/PontosTuristico/${id}`, data)
+    return { data: response.data, status: response.status };
   } catch (error) {
     return error.response.status;
   }

@@ -1,6 +1,6 @@
-import {updateTouristSpot, addTouristSpot} from '../../../service/service';
+import { updateTouristSpot, addTouristSpot } from '../../../service/service';
 
-export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setTipoAtracao, setEstadoSelecionado, setCidade, toast) => {
+export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast) => {
   try {
     setIsButtonDisabled(true);
     if (idEdit) {
@@ -16,7 +16,7 @@ export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsBut
         toast.success('Ponto Turístico cadastrado com sucesso!');
         setNome('');
         setDescricao('');
-        setTipoAtracao('');
+        setEndereco('');
         setEstadoSelecionado('');
         setCidade('');
       } else {
