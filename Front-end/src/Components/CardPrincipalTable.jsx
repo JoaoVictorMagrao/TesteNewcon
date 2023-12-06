@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom} from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom } from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
 import { getPontosService, deleteTouristSpot } from '../service/service';
 import { ToastContainer, toast } from 'react-toastify';
@@ -50,13 +50,13 @@ function CardPrincipalTable() {
   const handleClose = () => {
     setOpen(false);
   };
- 
+
   const handleExcluir = async () => {
     const response = await deleteTouristSpot(idToDelete);
-    if(response === 200){
+    if (response === 200) {
       toast.success('Ponto Turístico excluido com sucesso!');
       fetchData();
-    }else{
+    } else {
       toast.error('Erro ao cadastrar Ponto Turístico.');
     }
     setOpen(false);
@@ -71,65 +71,65 @@ function CardPrincipalTable() {
   return (
     <div>
       <div className='flex justify-end'>
-        
+
       </div>
       <div className='w-3/5 mx-auto mt-5'>
-      <TableContainer component={Paper}>
+        <TableContainer component={Paper}>
           <Table aria-label='pontos table'>
             <TableHead>
-            <TableRow>
-              <TableCell>Nome</TableCell>
-              <TableCell>Descrição</TableCell>
-              <TableCell>Tipo de Atração</TableCell>
-              <TableCell>Estado</TableCell>
-              <TableCell>Cidade</TableCell>
-              <TableCell>Editar</TableCell>
-              <TableCell>Excluir</TableCell>
-            </TableRow>
+              <TableRow>
+                <TableCell>Nome</TableCell>
+                <TableCell>Descrição</TableCell>
+                <TableCell>Endereço</TableCell>
+                <TableCell>Estado</TableCell>
+                <TableCell>Cidade</TableCell>
+                <TableCell>Editar</TableCell>
+                <TableCell>Excluir</TableCell>
+              </TableRow>
             </TableHead>
-                <TableBody>
-          
-                    {touristSpotList.length > 0 ? (
-                      touristSpotList.slice(startIndex, endIndex).map((ponto) => (
-                        <TableRow key={ponto.id}>
-                          <TableCell>{ponto.nome}</TableCell>
-                          <TableCell>{ponto.descricao}</TableCell>
-                          <TableCell>{ponto.tipo_atracao}</TableCell>
-                          <TableCell>{ponto.estado}</TableCell>
-                          <TableCell>{ponto.cidade}</TableCell>
-                          <TableCell>
-                          <Tooltip arrow TransitionComponent={Zoom} title="Editar">
-                            <Pencil
-                              size={25}
-                              color='black'
-                              onClick={() => handleButtonEditTouristSpot(ponto.id)}
-                              className='cursor-pointer ml-3'
-                            />
-                             </Tooltip>
-                          </TableCell>
-                          <TableCell>
-                            <Tooltip arrow TransitionComponent={Zoom} title="Excluir">
-                            <Trash
-                              size={25}
-                              color='red'
-                              
-                              onClick={() => handleClickOpen(ponto.id)}
-                              className='cursor-pointer ml-3'
-                            />
-                            </Tooltip>
-                          </TableCell>
-                        </TableRow>
-                      ))
-                    ) : loading ? (
-                      <TableRow>
-                        <TableCell colSpan={7}>Carregando...</TableCell>
-                      </TableRow>
-                    ) : (
-                      <TableRow>
-                        <TableCell colSpan={7}>Nenhum ponto turístico cadastrado!</TableCell>
-                      </TableRow>
-                    )}
-    </TableBody>
+            <TableBody>
+
+              {touristSpotList.length > 0 ? (
+                touristSpotList.slice(startIndex, endIndex).map((ponto) => (
+                  <TableRow key={ponto.id}>
+                    <TableCell>{ponto.nome}</TableCell>
+                    <TableCell>{ponto.descricao}</TableCell>
+                    <TableCell>{ponto.endereco}</TableCell>
+                    <TableCell>{ponto.estado}</TableCell>
+                    <TableCell>{ponto.cidade}</TableCell>
+                    <TableCell>
+                      <Tooltip arrow TransitionComponent={Zoom} title="Editar">
+                        <Pencil
+                          size={25}
+                          color='black'
+                          onClick={() => handleButtonEditTouristSpot(ponto.id)}
+                          className='cursor-pointer ml-3'
+                        />
+                      </Tooltip>
+                    </TableCell>
+                    <TableCell>
+                      <Tooltip arrow TransitionComponent={Zoom} title="Excluir">
+                        <Trash
+                          size={25}
+                          color='red'
+
+                          onClick={() => handleClickOpen(ponto.id)}
+                          className='cursor-pointer ml-3'
+                        />
+                      </Tooltip>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : loading ? (
+                <TableRow>
+                  <TableCell colSpan={7}>Carregando...</TableCell>
+                </TableRow>
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={7}>Nenhum ponto turístico cadastrado!</TableCell>
+                </TableRow>
+              )}
+            </TableBody>
           </Table>
           <TablePagination
             rowsPerPageOptions={[5, 10, 20]}
@@ -157,22 +157,22 @@ function CardPrincipalTable() {
         <DialogTitle>{"Excluir Ponto Turístico"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-          Tem certeza de que deseja excluir este Ponto Turístico? Esta ação não pode ser desfeita.
+            Tem certeza de que deseja excluir este Ponto Turístico? Esta ação não pode ser desfeita.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-        <Button onClick={handleClose}>
-           Cancelar
-        </Button>
-        <Button onClick={handleExcluir}>
-          Excluir
-        </Button>
+          <Button onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button onClick={handleExcluir}>
+            Excluir
+          </Button>
         </DialogActions>
       </Dialog>
-      <ToastContainer 
-      autoClose={3000}
-      position="bottom-right"
-      theme="colored"  />
+      <ToastContainer
+        autoClose={3000}
+        position="bottom-right"
+        theme="colored" />
     </div>
   );
 }

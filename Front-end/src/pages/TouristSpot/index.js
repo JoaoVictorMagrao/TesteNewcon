@@ -25,7 +25,7 @@ function TouristSpot() {
     pageTitle: pageTitle,
     nome: nome,
     descricao: descricao,
-    tipo_atracao: endereco,
+    endereco: endereco,
     estado: estadoSelecionado,
     cidade: cidade,
     estados: estados,
