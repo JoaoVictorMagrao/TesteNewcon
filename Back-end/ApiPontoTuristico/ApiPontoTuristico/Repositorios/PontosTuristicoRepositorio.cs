@@ -43,6 +43,7 @@ namespace ApiPontoTuristico.Repositorios
             pontoTuristicoPorId.Endereco = pontosTuristico.Endereco;
             pontoTuristicoPorId.Estado = pontosTuristico.Estado;
             pontoTuristicoPorId.Cidade = pontosTuristico.Cidade;
+            pontoTuristicoPorId.dataInclusao = pontosTuristico.dataInclusao;
 
             _dbContext.PontosTuristico.Update(pontoTuristicoPorId);
             await _dbContext.SaveChangesAsync();

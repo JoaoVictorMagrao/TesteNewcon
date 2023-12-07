@@ -37,7 +37,8 @@ namespace ApiPontoTuristico.Controllers
         [HttpPost]
          public async Task<ActionResult<PontosTuristicoModel>> Cadastrar([FromBody] PontosTuristicoModel pontosTuristicoModel)
         {
-            PontosTuristicoModel pontosTuristico=  await _pontosTuristicoRepositorio.Adicionar(pontosTuristicoModel);
+            pontosTuristicoModel.dataInclusao = DateTime.Now;
+            PontosTuristicoModel pontosTuristico = await _pontosTuristicoRepositorio.Adicionar(pontosTuristicoModel);
 
             return Ok(pontosTuristico);
         }
