@@ -20,7 +20,7 @@ function CardPrincipalTable() {
   const endIndex = startIndex + rowsPerPage;
   const [touristSpotList, setTouristSpotList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
 
   const Transition = React.forwardRef(function Transition(props, ref) {
@@ -152,6 +152,7 @@ function CardPrincipalTable() {
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
+        disableBackdropClick={false}
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>{"Excluir Ponto Turístico"}</DialogTitle>

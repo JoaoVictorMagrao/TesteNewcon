@@ -6,12 +6,13 @@ import FormTouristSpost from '../../Components/FormTouristSpot';
 import { estados } from '../../Util/util';
 import { toast } from 'react-toastify';
 
-const url = window.location.href;
 const urlParams = new URLSearchParams(window.location.search);
 const idEdit = urlParams.get('id');
 
-const buttonText = idEdit ? 'Atualizar' : 'Cadastrar';
-const pageTitle = idEdit ? 'Editar Ponto Turístico' : 'Cadastro de Ponto Turístico';
+
+
+
+
 
 function TouristSpot() {
   const [nome, setNome] = useState('');
@@ -20,7 +21,8 @@ function TouristSpot() {
   const [estadoSelecionado, setEstadoSelecionado] = useState('');
   const [cidade, setCidade] = useState('');
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-
+  const [buttonText, setButtonText] = useState('');
+  const [pageTitle, setPageTitle] = useState('');
   let dataProps = {
     pageTitle: pageTitle,
     nome: nome,
@@ -39,8 +41,10 @@ function TouristSpot() {
   };
 
   useEffect(() => {
-
-    if (url.includes('id')) {
+    const urlVerificaId = window.location.href;
+    if (urlVerificaId.includes('id')) {
+      setButtonText('Atualizar');
+      setPageTitle('Editar Ponto Turístico');
       uniqueTouristSpotList(idEdit)
         .then((value) => {
           if (value.status) {
@@ -58,6 +62,8 @@ function TouristSpot() {
           toast.error('Algo de errado aconteceu, tente novamente mais tarde.');
         });
     } else {
+      setButtonText('Cadastrar');
+      setPageTitle('Cadastro de Ponto Turístico');
       setNome('');
       setDescricao('');
       setEndereco('');
