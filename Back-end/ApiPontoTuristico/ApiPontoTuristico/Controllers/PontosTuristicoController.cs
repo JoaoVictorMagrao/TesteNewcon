@@ -24,6 +24,9 @@ namespace ApiPontoTuristico.Controllers
         public async Task<ActionResult<List<PontosTuristicoModel>>> BuscarTodosPontosTuristicos()
         {
             List<PontosTuristicoModel> pontosTuristico = await _pontosTuristicoRepositorio.BuscarTodosPontosTuristico();
+
+            pontosTuristico = pontosTuristico.OrderByDescending(p => p.dataInclusao).ToList();
+
             return Ok(pontosTuristico);
         }
 
