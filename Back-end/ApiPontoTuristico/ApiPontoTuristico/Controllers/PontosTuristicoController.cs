@@ -38,12 +38,19 @@ namespace ApiPontoTuristico.Controllers
         }
 
         [HttpPost]
-         public async Task<ActionResult<PontosTuristicoModel>> Cadastrar([FromBody] PontosTuristicoModel pontosTuristicoModel)
+        public async Task<ActionResult<PontosTuristicoModel>> Cadastrar([FromBody] PontosTuristicoModel pontosTuristicoModel)
         {
-            pontosTuristicoModel.dataInclusao = DateTime.Now;
-            PontosTuristicoModel pontosTuristico = await _pontosTuristicoRepositorio.Adicionar(pontosTuristicoModel);
+            try
+            {
+                pontosTuristicoModel.dataInclusao = DateTime.Now;
+                PontosTuristicoModel pontosTuristico = await _pontosTuristicoRepositorio.Adicionar(pontosTuristicoModel);
 
-            return Ok(pontosTuristico);
+                return Ok(true);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao cadastrar ponto turístico: {ex.Message}");
+            }
         }
 
         [HttpPut("{id}")]
@@ -51,14 +58,24 @@ namespace ApiPontoTuristico.Controllers
         {
             pontosTuristicoModel.Id = id;
             PontosTuristicoModel pontosTuristico = await _pontosTuristicoRepositorio.Atualizar(pontosTuristicoModel, id);
-            return Ok(pontosTuristico);
+            return Ok(true);
         }
-
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PontosTuristicoModel>> Apagar(int id)
+        public async Task<ActionResult<object>> Apagar(int id)
         {
-            bool apagado = await _pontosTuristicoRepositorio.Apagar(id);
-            return Ok(apagado);
+            try
+            {
+                bool apagado = await _pontosTuristicoRepositorio.Apagar(id);
+
+                if (apagado)
+                    return Ok(apagado);
+                else
+                    return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao apagar ponto turístico: {ex.Message}");
+            }
         }
     }
 }

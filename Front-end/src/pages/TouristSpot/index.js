@@ -11,9 +11,6 @@ const idEdit = urlParams.get('id');
 
 
 
-
-
-
 function TouristSpot() {
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');

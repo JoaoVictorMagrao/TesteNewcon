@@ -2,7 +2,7 @@ import { updateTouristSpot, addTouristSpot } from '../../../service/service';
 
 export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast) => {
   let verificaCaracteresDescricao = newTouristSpot.descricao;
-  if (verificaCaracteresDescricao > 100) {
+  if (verificaCaracteresDescricao.length > 100) {
     toast.warning('O campo "Descrição" não pode conter mais de 100 caracteres.');
   } else {
     try {
