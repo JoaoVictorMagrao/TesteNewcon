@@ -17,6 +17,20 @@ namespace ApiPontoTuristico.Repositorios
             return await _dbContext.PontosTuristico.FirstOrDefaultAsync(x => x.Id == id);
         }
 
+        public async Task<List<PontosTuristicoModel>> BuscarPorNome(string nome)
+        {
+            return await _dbContext.PontosTuristico
+                                     .Where(x => EF.Functions.Like(x.Nome, $"%{nome}%"))
+                                     .ToListAsync();
+        }
+
+        public async Task<List<PontosTuristicoModel>> BuscarPorDescricao(string descricao)
+        {
+            return await _dbContext.PontosTuristico
+                                     .Where(x => EF.Functions.Like(x.Descricao, $"%{descricao}%"))
+                                     .ToListAsync();
+        }
+
         public async Task<List<PontosTuristicoModel>> BuscarTodosPontosTuristico()
         {
             return await _dbContext.PontosTuristico.ToListAsync();

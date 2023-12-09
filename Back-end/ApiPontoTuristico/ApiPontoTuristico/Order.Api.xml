@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ApiPontoTuristico</name>
+    </assembly>
+    <members>
+        <member name="M:ApiPontoTuristico.Controllers.PontosTuristicoController.BuscarTodosPontosTuristicos">
+            <summary>
+            Obtém todos os pontos turísticos cadastrados.
+            </summary>
+            <returns>
+            Retorna uma lista de pontos turísticos ordenados por data de inclusão em ordem decrescente.
+            A resposta é um objeto ActionResult contendo a lista de pontos turísticos ou um código de erro em caso de falha.
+            </returns>
+        </member>
+        <member name="M:ApiPontoTuristico.Controllers.PontosTuristicoController.Apagar(System.Int32)">
+            <summary>
+            Apaga um ponto turístico pelo ID.
+            </summary>
+            <param name="id">ID do ponto turístico a ser apagado.</param>
+            <returns>Retorna NoContent se o ponto turístico foi apagado com sucesso, NotFound se não foi encontrado.</returns>
+        </member>
+    </members>
+</doc>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom } from '@mui/material';
+import { Table, TableBody, Typography, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom, TextField, Button } from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
 import { getPontosService, deleteTouristSpot } from '../service/service';
+import { searchName } from '../pages/Home/functions/searchName';
+import { searchDescription } from '../pages/Home/functions/serachDescription';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -11,7 +13,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
-import Button from '@mui/material/Button';
+
+
 
 function CardPrincipalTable() {
   const [page, setPage] = useState(0);
@@ -22,6 +25,10 @@ function CardPrincipalTable() {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
+  const [filterValueButton, setFilterValueButton] = useState("Filtrar por nome");
+  const [filterName, setFilterName] = useState("");
+  const [filterDescription, setFilterDescription] = useState("");
+
 
   const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -41,6 +48,24 @@ function CardPrincipalTable() {
       setLoading(false);
     }
   }
+
+  const clickFilterTouristSpot = async () => {
+    try {
+      if (filterValueButton === "Filtrar por nome") {
+        const data = await searchName(filterName, toast);
+        setTouristSpotList(data);
+        setLoading(false);
+
+      } else {
+        const data = await searchDescription(filterDescription, toast);
+        setTouristSpotList(data);
+        setLoading(false);
+
+      }
+    } catch (error) {
+      console.error("Erro ao filtrar pontos turísticos:", error);
+    }
+  };
 
   const handleClickOpen = (id) => {
     setIdToDelete(id);
@@ -66,15 +91,53 @@ function CardPrincipalTable() {
     window.location.href = `/PontoTuristico?id=${id}`;
   };
 
+  const handleNameChange = (event) => {
+    const nameFilter = event.target.value;
+    setFilterName(nameFilter);
+    setFilterValueButton('Filtrar por nome');
+  };
+
+  const handleDescriptionChange = (event) => {
+
+    const descriptionFilter = event.target.value;
+    setFilterDescription(descriptionFilter);
+    setFilterValueButton('Filtrar por descrição');
+  };
+
 
 
   return (
     <div>
-      <div className='flex justify-end'>
 
-      </div>
       <div className='w-3/5 mx-auto mt-5'>
+        <div className='flex justify-around mb-5 items-center'>
+          <TextField
+            label="Filtrar por Nome"
+            variant="outlined"
+            margin="normal"
+            onChange={handleNameChange}
+            className='w-1/4'
+          />
+
+          <TextField
+            label="Filtrar por Descrição"
+            variant="outlined"
+            margin="normal"
+            onChange={handleDescriptionChange}
+            className='w-1/4'
+          />
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={clickFilterTouristSpot}
+            className='h-10'
+          >
+            <Typography>{filterValueButton}</Typography>
+          </Button>
+        </div>
         <TableContainer component={Paper}>
+
           <Table aria-label='pontos table'>
             <TableHead>
               <TableRow>
@@ -88,7 +151,6 @@ function CardPrincipalTable() {
               </TableRow>
             </TableHead>
             <TableBody>
-
               {touristSpotList.length > 0 ? (
                 touristSpotList.slice(startIndex, endIndex).map((ponto) => (
                   <TableRow key={ponto.id}>

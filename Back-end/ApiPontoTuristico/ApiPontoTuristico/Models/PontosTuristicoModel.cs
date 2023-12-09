@@ -15,6 +15,6 @@
         public string? Cidade { get; set; }
 
         public DateTime? dataInclusao { get; set; }
-       // public DateTime DataInclusao { get; internal set; }
+     
     }
 }

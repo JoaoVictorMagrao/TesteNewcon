@@ -46,3 +46,23 @@ export const uniqueTouristSpotList = async (id, data) => {
     return error.response.status;
   }
 }
+
+export const searchNameFilter = async (name) => {
+  try {
+    const response = await api.get(`api/PontosTuristico/nome?nome=${name}`);
+    return { data: response.data, status: response.status };
+
+  } catch (error) {
+    return error.response.status;
+  }
+}
+
+export const searchDescriptionFilter = async (description) => {
+  try {
+    const response = await api.get(`api/PontosTuristico/descricao?descricao=${description}`);
+    return { data: response.data, status: response.status };
+
+  } catch (error) {
+    return error.response.status;
+  }
+}

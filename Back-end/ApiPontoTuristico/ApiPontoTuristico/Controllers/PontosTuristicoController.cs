@@ -19,7 +19,13 @@ namespace ApiPontoTuristico.Controllers
         {
             _pontosTuristicoRepositorio = pontosTuristicoRepositorio;
         }
-
+        /// <summary>
+        /// Obtém todos os pontos turísticos cadastrados.
+        /// </summary>
+        /// <returns>
+        /// Retorna uma lista de pontos turísticos ordenados por data de inclusão em ordem decrescente.
+        /// A resposta é um objeto ActionResult contendo a lista de pontos turísticos ou um código de erro em caso de falha.
+        /// </returns>
         [HttpGet]
         public async Task<ActionResult<List<PontosTuristicoModel>>> BuscarTodosPontosTuristicos()
         {
@@ -60,6 +66,11 @@ namespace ApiPontoTuristico.Controllers
             PontosTuristicoModel pontosTuristico = await _pontosTuristicoRepositorio.Atualizar(pontosTuristicoModel, id);
             return Ok(true);
         }
+        /// <summary>
+        /// Apaga um ponto turístico pelo ID.
+        /// </summary>
+        /// <param name="id">ID do ponto turístico a ser apagado.</param>
+        /// <returns>Retorna NoContent se o ponto turístico foi apagado com sucesso, NotFound se não foi encontrado.</returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult<object>> Apagar(int id)
         {
@@ -75,6 +86,50 @@ namespace ApiPontoTuristico.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Erro ao apagar ponto turístico: {ex.Message}");
+            }
+        }
+
+        [HttpGet("nome")]
+        public async Task<ActionResult<List<PontosTuristicoModel>>> BuscarPorNome(string nome)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(nome))
+                {
+                    return BadRequest("O parâmetro 'nome' não pode ser vazio.");
+                }
+
+                List<PontosTuristicoModel> pontosTuristico = await _pontosTuristicoRepositorio.BuscarPorNome(nome);
+
+                return Ok(pontosTuristico);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao buscar pontos turísticos por nome: {ex.Message}");
+            }
+        }
+
+
+        [HttpGet("descricao")]
+        public async Task<ActionResult<List<PontosTuristicoModel>>> BuscarPorDescricao(string descricao)
+        {
+            try
+            {
+
+                if (string.IsNullOrEmpty(descricao))
+                {
+                    return BadRequest("O parâmetro 'Descrição' não pode ser vazio.");
+                }
+
+                List<PontosTuristicoModel> pontosTuristico = await _pontosTuristicoRepositorio.BuscarPorDescricao(descricao);
+
+           
+
+                return Ok(pontosTuristico);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao buscar pontos turísticos por nome: {ex.Message}");
             }
         }
     }
