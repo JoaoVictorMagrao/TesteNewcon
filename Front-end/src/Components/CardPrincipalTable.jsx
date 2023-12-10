@@ -29,11 +29,6 @@ function CardPrincipalTable() {
   const [filterName, setFilterName] = useState("");
   const [filterDescription, setFilterDescription] = useState("");
 
-
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -72,8 +67,10 @@ function CardPrincipalTable() {
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (event, reason) => {
+    if (reason !== 'backdropClick') {
+      setOpen(false);
+    }
   };
 
   const handleExcluir = async () => {
@@ -95,6 +92,7 @@ function CardPrincipalTable() {
     const nameFilter = event.target.value;
     setFilterName(nameFilter);
     setFilterValueButton('Filtrar por nome');
+    setFilterDescription('');
   };
 
   const handleDescriptionChange = (event) => {
@@ -102,6 +100,7 @@ function CardPrincipalTable() {
     const descriptionFilter = event.target.value;
     setFilterDescription(descriptionFilter);
     setFilterValueButton('Filtrar por descrição');
+    setFilterName('');
   };
 
 
@@ -211,11 +210,11 @@ function CardPrincipalTable() {
       </div>
       <Dialog
         open={open}
-        TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
-        disableBackdropClick={false}
+        disableEscapeKeyDown
         aria-describedby="alert-dialog-slide-description"
+
       >
         <DialogTitle>{"Excluir Ponto Turístico"}</DialogTitle>
         <DialogContent>
