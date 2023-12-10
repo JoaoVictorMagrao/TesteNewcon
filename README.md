@@ -35,10 +35,10 @@ git clone https://github.com/JoaoVictorMagrao/newcon-crud/tree/master/Back-end/A
 # executar o projeto
   dotnet run
 
+```
 
 ## Front end web
 Pré-requisitos: npm 
-```
 
 ```bash
 # clonar repositório
