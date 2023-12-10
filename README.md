@@ -44,8 +44,6 @@ Pré-requisitos: npm
 # clonar repositório
 git clone https://github.com/JoaoVictorMagrao/newcon-crud/tree/master/Front-end
 
-# entrar na pasta do projeto front end web
-
 # instalar dependências
 npm install
 
