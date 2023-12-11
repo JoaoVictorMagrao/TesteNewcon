@@ -5,7 +5,7 @@
 Este projeto foi concebido como um desafio de avaliação de conhecimento, inspirado em experiências anteriores.
 
 *Recursos Principais:*
-- *CRUD Completo:* Foi desenvolvido um sistema de CRUD robusto para gerenciar pontos turísticos.
+- *CRUD Completo:* Foi desenvolvido um sistema de CRUD para gerenciar pontos turísticos.
 - *Listagem Dinâmica:* Na página principal, você encontrará uma tabela detalhada que lista todos os pontos turísticos cadastrados.
 - *Ações Intuitivas:* Para maior praticidade, na tabela de listagem tem as opções de edição e exclusão.
 - *Filtros:* Contem dois filtros, um de nome e o outro de descrição, permitindo uma localização rápida dos pontos turísticos desejados.
