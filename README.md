@@ -26,23 +26,32 @@ Este projeto foi concebido como um desafio de avaliação de conhecimento, inspi
 
 # Como executar o projeto
 
+```bash
+# clonar repositório
+git clone https://github.com/JoaoVictorMagrao/newcon-crud
+```
+
 ## Back end
 
 ```bash
-# clonar repositório
-git clone https://github.com/JoaoVictorMagrao/newcon-crud/tree/master/Back-end/ApiPontoTuristico/ApiPontoTuristico
 
-# executar o projeto
+# Entrar na pasta do projeto back-end
+  cd back-end
+
+ # Entrar no appSettings, preencher as campos com as configurações do seu banco de dados.
+Exemplo:  "DataBase": "Server=./;DataBase=DB_PontosTuristico;User Id=sa;Password=123456"
+
+ # Em seguida rodar as migrations para criação da tabela
+  Add-Migration InitialDB
+# Comando para compilar o projeto 
   dotnet run
-
 ```
+
 
 ## Front end web
 Pré-requisitos: npm 
 
 ```bash
-# clonar repositório
-git clone https://github.com/JoaoVictorMagrao/newcon-crud/tree/master/Front-end
 
 # instalar dependências
 npm install
