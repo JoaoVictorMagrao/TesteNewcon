@@ -52,6 +52,8 @@ Exemplo:  "DataBase": "Server=./;DataBase=DB_PontosTuristico;User Id=sa;Password
 Pré-requisitos: npm 
 
 ```bash
+# Entrar na pasta do projeto back-end
+  cd front-end
 
 # instalar dependências
 npm install
