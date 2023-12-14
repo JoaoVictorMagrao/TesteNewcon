@@ -14,10 +14,8 @@ function Home() {
 
   return (
     <div>
-
       <DrawerLeft />
       <CardPrincipalTable setData={() => setData()} />
-
       <FilterTouristSpot />
     </div>
   );

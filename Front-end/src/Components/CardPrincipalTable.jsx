@@ -5,6 +5,7 @@ import { getPontosService, deleteTouristSpot } from '../service/service';
 import { searchName } from '../pages/Home/functions/searchName';
 import { searchDescription } from '../pages/Home/functions/serachDescription';
 import { ToastContainer, toast } from 'react-toastify';
+import LoadingSpinner from './Loader';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Dialog from '@mui/material/Dialog';
@@ -12,7 +13,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Slide from '@mui/material/Slide';
+
 
 
 
@@ -22,7 +23,7 @@ function CardPrincipalTable() {
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
   const [touristSpotList, setTouristSpotList] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
   const [filterValueButton, setFilterValueButton] = useState("Filtrar por nome");
@@ -35,7 +36,7 @@ function CardPrincipalTable() {
 
   async function fetchData() {
     try {
-      const data = await getPontosService();
+      const data = await getPontosService(setLoading);
       setTouristSpotList(data);
       setLoading(false);
     } catch (error) {
@@ -107,6 +108,10 @@ function CardPrincipalTable() {
 
   return (
     <div>
+
+      <div>
+        {loading && <LoadingSpinner />}
+      </div>
 
       <div className='w-3/5 mx-auto mt-5'>
         <div className='flex justify-around mb-5 items-center'>
@@ -181,10 +186,6 @@ function CardPrincipalTable() {
                     </TableCell>
                   </TableRow>
                 ))
-              ) : loading ? (
-                <TableRow>
-                  <TableCell colSpan={7}>Carregando...</TableCell>
-                </TableRow>
               ) : (
                 <TableRow>
                   <TableCell colSpan={7}>Nenhum ponto turístico cadastrado!</TableCell>

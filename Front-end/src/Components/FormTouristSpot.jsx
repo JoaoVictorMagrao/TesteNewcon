@@ -1,6 +1,6 @@
 import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+
 function FormTouristSpot(props) {
-  //console.log(props);
   return (
     <div>
       <Box className="flex justify-center">

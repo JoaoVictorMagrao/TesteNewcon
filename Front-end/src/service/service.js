@@ -5,7 +5,8 @@ export const api = axios.create({
   baseURL: 'https://localhost:7205/',
 })
 
-export const getPontosService = async () => {
+export const getPontosService = async (setLoading) => {
+  setLoading(true);
   const response = await api.get('api/PontosTuristico');
   return response.data;
 }
