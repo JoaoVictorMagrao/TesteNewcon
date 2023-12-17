@@ -32,6 +32,7 @@ git clone https://github.com/JoaoVictorMagrao/newcon-crud
 ```
 
 ## Back end
+Pré-requisitos: .NET 6.0
 
 ```bash
 
@@ -49,17 +50,17 @@ Exemplo:  "DataBase": "Server=./;DataBase=DB_PontosTuristico;User Id=sa;Password
 
 
 ## Front end web
-Pré-requisitos: npm 
+Pré-requisitos: yarn
 
 ```bash
 # Entrar na pasta do projeto back-end
   cd front-end
 
 # instalar dependências
-npm install
+yarn install
 
 # executar o projeto
-npm start
+yarn start
 ```
 
 # Autor
