@@ -31,16 +31,18 @@ function CardPrincipalTable() {
   const [filterDescription, setFilterDescription] = useState("");
 
   useEffect(() => {
+    console.log('Componente montado');
     fetchData();
   }, []);
 
   async function fetchData() {
+    console.log('Chamando fetchData');
     try {
       const data = await getPontosService(setLoading);
       setTouristSpotList(data);
       setLoading(false);
     } catch (error) {
-      console.error('Erro ao obter pontos turísticos', error);
+      toast.error('Erro ao obter pontos turísticos');
       setLoading(false);
     }
   }
@@ -56,10 +58,9 @@ function CardPrincipalTable() {
         const data = await searchDescription(filterDescription, toast);
         setTouristSpotList(data);
         setLoading(false);
-
       }
     } catch (error) {
-      console.error("Erro ao filtrar pontos turísticos:", error);
+      toast.error('Erro ao filtrar pontos turísticos, verifique o servidor.');
     }
   };
 
@@ -78,6 +79,7 @@ function CardPrincipalTable() {
     const response = await deleteTouristSpot(idToDelete);
     if (response === 200) {
       toast.success('Ponto Turístico excluido com sucesso!');
+      alert('1');
       fetchData();
     } else {
       toast.error('Erro ao cadastrar Ponto Turístico.');

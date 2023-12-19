@@ -1,18 +1,19 @@
 import axios from 'axios'
 
-
 export const api = axios.create({
   baseURL: 'https://localhost:7205/',
 })
 
-export const getPontosService = async (setLoading) => {
-  setLoading(true);
-  const response = await api.get('api/PontosTuristico');
-  return response.data;
+export const getPontosService = async () => {
+  try {
+    const response = await api.get('api/PontosTuristico');
+    return response.data;
+  } catch (error) {
+    return error.response.status;
+  }
 }
 
 export async function addTouristSpot(newTouristSpot) {
-
   try {
     const response = await api.post('api/PontosTuristico', newTouristSpot);
     return response.status;
@@ -52,7 +53,6 @@ export const searchNameFilter = async (name) => {
   try {
     const response = await api.get(`api/PontosTuristico/nome?nome=${name}`);
     return { data: response.data, status: response.status };
-
   } catch (error) {
     return error.response.status;
   }
@@ -62,7 +62,6 @@ export const searchDescriptionFilter = async (description) => {
   try {
     const response = await api.get(`api/PontosTuristico/descricao?descricao=${description}`);
     return { data: response.data, status: response.status };
-
   } catch (error) {
     return error.response.status;
   }

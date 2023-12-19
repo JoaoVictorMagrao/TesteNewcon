@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DrawerLeft from '../Components/DrawerLeft';
 import CardPrincipalTable from '../../Components/CardPrincipalTable';
-import { usePontosContext } from '../context/index';
 
 function Home() {
   const [data, setData] = useState('');
