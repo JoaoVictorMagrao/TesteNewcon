@@ -38,12 +38,13 @@ Pré-requisitos: .NET 6.0
 
 # Entrar na pasta do projeto back-end
   cd back-end
+  cd ApiPontoTuristico
 
  # Entrar no appSettings, preencher as campos com as configurações do seu banco de dados.
 Exemplo:  "DataBase": "Server=./;DataBase=DB_PontosTuristico;User Id=sa;Password=123456"
 
  # Em seguida rodar as migrations para criação da tabela
-  Add-Migration InitialDB
+  dotnet ef migrations add InitialDB
 # Comando para compilar o projeto 
   dotnet run
 ```
