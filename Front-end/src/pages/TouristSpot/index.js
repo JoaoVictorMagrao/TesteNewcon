@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { uniqueTouristSpotList } from '../../service/service';
 import { AddOrRegisterTouristPoint } from './functions/addOrRegisterTouristPoint';
 import FormTouristSpost from '../../Components/FormTouristSpot';
@@ -8,8 +8,6 @@ import { toast } from 'react-toastify';
 
 const urlParams = new URLSearchParams(window.location.search);
 const idEdit = urlParams.get('id');
-
-
 
 function TouristSpot() {
   const [nome, setNome] = useState('');
@@ -20,6 +18,8 @@ function TouristSpot() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [buttonText, setButtonText] = useState('');
   const [pageTitle, setPageTitle] = useState('');
+  const navigate = useNavigate();
+
   let dataProps = {
     pageTitle: pageTitle,
     nome: nome,
@@ -31,7 +31,6 @@ function TouristSpot() {
     isButtonDisabled: isButtonDisabled,
     buttonText: buttonText
   }
-
 
   const handleEstadoChange = (event) => {
     setEstadoSelecionado(event.target.value);
@@ -80,7 +79,7 @@ function TouristSpot() {
       cidade: cidade
     };
 
-    AddOrRegisterTouristPoint(idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast);
+    AddOrRegisterTouristPoint(idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast, navigate);
   };
 
   return (

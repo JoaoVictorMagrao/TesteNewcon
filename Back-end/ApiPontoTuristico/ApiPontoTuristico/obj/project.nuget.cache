@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DyZZKXIlYuLswtK5XVAikoM7J94sAPJN04m0hdmmZdX/rwMLVcfA2evYk0HpqZMCESunpQnxTLZ58nQn+tGNBA==",
+  "dgSpecHash": "ForYXFK0VrFod7S/M7l0bluMufj91ubBIbVEECdX3AXZnownzYfI4RSTwGW+WTjxDtCJ6GEhQ00sWTQ5hYzLDw==",
   "success": true,
-  "projectFilePath": "D:\\NovaAPIPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico.csproj",
+  "projectFilePath": "C:\\Users\\Usuario\\Desktop\\CrudPontoTuristico\\Back-end\\ApiPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Usuario\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Usuario\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",

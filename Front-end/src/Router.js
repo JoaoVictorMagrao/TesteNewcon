@@ -11,7 +11,7 @@ export function Router() {
     <Routes>
       <Route path="Home" element={<Layout children={<CardPrincipalTable />} menuDrawer='Cadastrar Ponto Turístico' titleDrawer={"Ponto Turístico"} />} />
       <Route path="/" element={<Navigate to="/Home" replace />} />
-      <Route path="/PontoTuristico" element={<Layout children={<TouristSpot />} menuDrawer='Ir para home' titleDrawer={idEdit ? 'Editar ponto turístico' : 'Cadastrar ponto turístico' } />} />
+      <Route path="/PontoTuristico" element={<Layout children={<TouristSpot />} menuDrawer='Ir para home' titleDrawer={idEdit ? 'Editar ponto turístico' : 'Cadastrar ponto turístico'} />} />
     </Routes>
   );
 }

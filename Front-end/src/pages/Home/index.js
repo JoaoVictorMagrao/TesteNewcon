@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DrawerLeft from '../Components/DrawerLeft';
-import CardPrincipalTable from '../../Components/CardPrincipalTable';
+
 
 function Home() {
   const [data, setData] = useState('');
@@ -14,7 +14,6 @@ function Home() {
   return (
     <div>
       <DrawerLeft />
-      <CardPrincipalTable setData={() => setData()} />
       <FilterTouristSpot />
     </div>
   );

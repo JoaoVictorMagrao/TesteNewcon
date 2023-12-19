@@ -1,6 +1,6 @@
 import { updateTouristSpot, addTouristSpot } from '../../../service/service';
 
-export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast) => {
+export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsButtonDisabled, setNome, setDescricao, setEndereco, setEstadoSelecionado, setCidade, toast, navigate) => {
   let verificaCaracteresDescricao = newTouristSpot.descricao;
   if (verificaCaracteresDescricao.length > 100) {
     toast.warning('O campo "Descrição" não pode conter mais de 100 caracteres.');
@@ -10,14 +10,18 @@ export const AddOrRegisterTouristPoint = async (idEdit, newTouristSpot, setIsBut
       if (idEdit) {
         const response = await updateTouristSpot(idEdit, newTouristSpot);
         if (response === 200) {
-          toast.success('Ponto Turístico atualizado com sucesso!');
+          toast.success('Ponto Turístico atualizado com sucesso!', {
+            onClose: () => navigate('/home'),
+          });
         } else {
           toast.error('Erro ao atualizar Ponto Turístico.');
         }
       } else {
         const response = await addTouristSpot(newTouristSpot);
         if (response === 200) {
-          toast.success('Ponto Turístico cadastrado com sucesso!');
+          toast.success('Ponto Turístico cadastrado com sucesso!', {
+            onClose: () => navigate('/home'),
+          });
           setNome('');
           setDescricao('');
           setEndereco('');
