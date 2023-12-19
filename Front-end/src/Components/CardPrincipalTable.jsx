@@ -23,7 +23,7 @@ function CardPrincipalTable() {
   const startIndex = page * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
   const [touristSpotList, setTouristSpotList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [idToDelete, setIdToDelete] = useState(null);
   const [filterValueButton, setFilterValueButton] = useState("Filtrar por nome");
@@ -31,12 +31,10 @@ function CardPrincipalTable() {
   const [filterDescription, setFilterDescription] = useState("");
 
   useEffect(() => {
-    console.log('Componente montado');
     fetchData();
   }, []);
 
   async function fetchData() {
-    console.log('Chamando fetchData');
     try {
       const data = await getPontosService(setLoading);
       setTouristSpotList(data);
