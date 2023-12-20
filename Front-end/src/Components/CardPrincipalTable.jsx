@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Table, TableBody, Typography, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination, Tooltip, Zoom, TextField, Button } from '@mui/material';
 import { Trash, Pencil } from 'phosphor-react';
 import { getPontosService, deleteTouristSpot } from '../service/service';
@@ -29,7 +29,8 @@ function CardPrincipalTable() {
   const [filterValueButton, setFilterValueButton] = useState("Filtrar por nome");
   const [filterName, setFilterName] = useState("");
   const [filterDescription, setFilterDescription] = useState("");
-
+  const descriptionInputRef = useRef(null);
+  const nameInputRef = useRef(null);
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,15 +49,26 @@ function CardPrincipalTable() {
   const clickFilterTouristSpot = async () => {
     try {
       if (filterValueButton === "Filtrar por nome") {
-        const data = await searchName(filterName, toast);
-        setTouristSpotList(data);
-        setLoading(false);
+        if (filterName) {
+          const data = await searchName(filterName, toast);
+          setTouristSpotList(data);
+          setLoading(false);
+        } else {
+          toast.warning('O filtro de nome não pode estar vazio');
+          nameInputRef.current.focus();
+        }
 
       } else {
-        const data = await searchDescription(filterDescription, toast);
-        setTouristSpotList(data);
-        setLoading(false);
+        if (filterDescription) {
+          const data = await searchDescription(filterDescription, toast);
+          setTouristSpotList(data);
+          setLoading(false);
+        } else {
+          toast.warning('O filtro de descrição não pode estar vazio');
+          descriptionInputRef.current.focus();
+        }
       }
+
     } catch (error) {
       toast.error('Erro ao filtrar pontos turísticos, verifique o servidor.');
     }
@@ -77,7 +89,6 @@ function CardPrincipalTable() {
     const response = await deleteTouristSpot(idToDelete);
     if (response === 200) {
       toast.success('Ponto Turístico excluido com sucesso!');
-      alert('1');
       fetchData();
     } else {
       toast.error('Erro ao cadastrar Ponto Turístico.');
@@ -89,14 +100,16 @@ function CardPrincipalTable() {
     window.location.href = `/PontoTuristico?id=${id}`;
   };
 
-  const handleNameChange = (event) => {
+  const handleNameClick = (event) => {
+
     const nameFilter = event.target.value;
     setFilterName(nameFilter);
     setFilterValueButton('Filtrar por nome');
     setFilterDescription('');
+
   };
 
-  const handleDescriptionChange = (event) => {
+  const handleDescriptionClick = (event) => {
 
     const descriptionFilter = event.target.value;
     setFilterDescription(descriptionFilter);
@@ -119,16 +132,20 @@ function CardPrincipalTable() {
             label="Filtrar por Nome"
             variant="outlined"
             margin="normal"
-            onChange={handleNameChange}
+            onChange={handleNameClick}
+            value={filterName}
             className='w-1/4'
+            inputRef={nameInputRef}
           />
 
           <TextField
             label="Filtrar por Descrição"
             variant="outlined"
             margin="normal"
-            onChange={handleDescriptionChange}
+            onChange={handleDescriptionClick}
+            value={filterDescription}
             className='w-1/4'
+            inputRef={descriptionInputRef}
           />
 
           <Button
