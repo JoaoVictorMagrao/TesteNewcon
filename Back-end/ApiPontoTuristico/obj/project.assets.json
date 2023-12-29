@@ -2482,11 +2482,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\CrudPontoTuristico\\Back-end\\ApiPontoTuristico\\ApiPontoTuristico.csproj",
+      "projectUniqueName": "D:\\NovaAPIPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico.csproj",
       "projectName": "ApiPontoTuristico",
-      "projectPath": "C:\\Users\\Usuario\\Desktop\\CrudPontoTuristico\\Back-end\\ApiPontoTuristico\\ApiPontoTuristico.csproj",
+      "projectPath": "D:\\NovaAPIPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Desktop\\CrudPontoTuristico\\Back-end\\ApiPontoTuristico\\obj\\",
+      "outputPath": "D:\\NovaAPIPontoTuristico\\ApiPontoTuristico\\ApiPontoTuristico\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
