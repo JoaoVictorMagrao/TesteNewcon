@@ -43,8 +43,8 @@ Pré-requisitos: .NET 6.0
  # Entrar no appSettings, preencher as campos com as configurações do seu banco de dados.
 Exemplo:  "DataBase": "Server=./;DataBase=DB_PontosTuristico;User Id=sa;Password=123456"
 
- # Em seguida rodar as migrations para criação da tabela
-  dotnet ef migrations add InitialDB
+ # Em seguida roda as migrations para criação da tabela
+  dotnet ef database update
 # Comando para compilar o projeto 
   dotnet run
 ```
