@@ -54,7 +54,7 @@ Exemplo:  "DataBase": "Server=./;DataBase=DB_PontosTuristico;User Id=sa;Password
 Pré-requisitos: yarn
 
 ```bash
-# Entrar na pasta do projeto back-end
+# Entrar na pasta do projeto front-end
   cd front-end
 
 # instalar dependências
