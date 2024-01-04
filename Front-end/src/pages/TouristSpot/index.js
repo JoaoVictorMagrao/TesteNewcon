@@ -7,7 +7,7 @@ import { estados } from '../../Util/util';
 import { toast } from 'react-toastify';
 
 const urlParams = new URLSearchParams(window.location.search);
-const idEdit = urlParams.get('id');
+//const idEdit = urlParams.get('id');
 
 function TouristSpot() {
   const [nome, setNome] = useState('');
@@ -18,7 +18,9 @@ function TouristSpot() {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [buttonText, setButtonText] = useState('');
   const [pageTitle, setPageTitle] = useState('');
+  const [idEdit, setIdEdit] = useState('');
   const navigate = useNavigate();
+
 
   let dataProps = {
     pageTitle: pageTitle,
@@ -37,6 +39,7 @@ function TouristSpot() {
   };
 
   useEffect(() => {
+    setIdEdit(urlParams.get('id'));
     const urlVerificaId = window.location.href;
     if (urlVerificaId.includes('id')) {
       setButtonText('Atualizar');

@@ -14,33 +14,30 @@ import ListItemButton from '@mui/material/ListItemButton';
 import StickyNote2Icon from '@mui/icons-material/StickyNote2';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import { useNavigate } from 'react-router-dom';
 
- function DrawerLeft({title, menu}){
-  
+function DrawerLeft({ title, menu }) {
+
   const drawerWidth = 240;
-  const navigate = useNavigate();
 
+  const handleButtonAddTouristSpot = () => {
+    if (menu === 'Ir para home') {
+      window.location.href = `/Home`;
+    } else if (menu === 'Cadastrar Ponto Turístico') {
+      window.location.href = `/PontoTuristico`;
+    }
+  }
 
-    const handleButtonAddTouristSpot  = () => {
-      if (menu === 'Ir para home') {
-        navigate('/home');
-      } else if (menu === 'Cadastrar Ponto Turístico') {
-        navigate('/PontoTuristico');
-      }
-   }
-
-  return(
-      <Box sx={{ display: 'flex' }}>
-        <CssBaseline />
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
       <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-          {title}
-          </Typography> 
+            {title}
+          </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -56,14 +53,14 @@ import { useNavigate } from 'react-router-dom';
         anchor="left"
       >
         <Toolbar />
-   
+
         <Divider />
         <List>
           {[menu].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton onClick={handleButtonAddTouristSpot}>
                 <ListItemIcon>
-                {index === 0 ? <PersonAddAlt1Icon /> : index === 1 ? <StickyNote2Icon /> : <CloseIcon />}
+                  {index === 0 ? <PersonAddAlt1Icon /> : index === 1 ? <StickyNote2Icon /> : <CloseIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>

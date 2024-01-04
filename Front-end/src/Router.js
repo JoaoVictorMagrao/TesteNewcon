@@ -6,7 +6,6 @@ import CardPrincipalTable from './Components/CardPrincipalTable';
 export function Router() {
   const urlParams = new URLSearchParams(window.location.search);
   const idEdit = urlParams.get('id');
-
   return (
     <Routes>
       <Route path="Home" element={<Layout children={<CardPrincipalTable />} menuDrawer='Cadastrar Ponto Turístico' titleDrawer={"Ponto Turístico"} />} />

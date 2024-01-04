@@ -19,13 +19,7 @@ namespace ApiPontoTuristico.Controllers
         {
             _pontosTuristicoRepositorio = pontosTuristicoRepositorio;
         }
-        /// <summary>
-        /// Obtém todos os pontos turísticos cadastrados.
-        /// </summary>
-        /// <returns>
-        /// Retorna uma lista de pontos turísticos ordenados por data de inclusão em ordem decrescente.
-        /// A resposta é um objeto ActionResult contendo a lista de pontos turísticos ou um código de erro em caso de falha.
-        /// </returns>
+   
         [HttpGet]
         public async Task<ActionResult<List<PontosTuristicoModel>>> BuscarTodosPontosTuristicos()
         {
@@ -66,11 +60,7 @@ namespace ApiPontoTuristico.Controllers
             PontosTuristicoModel pontosTuristico = await _pontosTuristicoRepositorio.Atualizar(pontosTuristicoModel, id);
             return Ok(true);
         }
-        /// <summary>
-        /// Apaga um ponto turístico pelo ID.
-        /// </summary>
-        /// <param name="id">ID do ponto turístico a ser apagado.</param>
-        /// <returns>Retorna NoContent se o ponto turístico foi apagado com sucesso, NotFound se não foi encontrado.</returns>
+      
         [HttpDelete("{id}")]
         public async Task<ActionResult<object>> Apagar(int id)
         {
